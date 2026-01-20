@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafid Tic Tac Toe</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            user-select: none;
+        }
+
+        /* --- TITLE & SCORE --- */
+        h1 { margin: 10px 0; color: #00d4ff; text-shadow: 0 0 10px #00d4ff; }
+        
+        .scoreboard {
+            display: flex; gap: 20px; margin-bottom: 20px;
+            font-size: 18px; font-weight: bold;
+        }
+        .score-box {
+            padding: 10px 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .x-score { color: #FF1744; border-color: #FF1744; box-shadow: 0 0 10px rgba(255, 23, 68, 0.3); }
+        .o-score { color: #00E676; border-color: #00E676; box-shadow: 0 0 10px rgba(0, 230, 118, 0.3); }
+
+        /* --- MODE SELECTION --- */
+        .controls { margin-bottom: 20px; display: flex; gap: 10px; }
+        .btn {
+            padding: 10px 20px; border: none; border-radius: 20px;
+            font-weight: bold; cursor: pointer; transition: 0.3s;
+            background: #333; color: #aaa;
+        }
+        .btn.active {
+            background: #00d4ff; color: black;
+            box-shadow: 0 0 15px #00d4ff;
+        }
+
+        /* --- GAME BOARD --- */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            background: #222;
+            padding: 5px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .cell {
+            background: #111;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 60px; font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .cell:hover { background: #1a1a1a; }
+        
+        /* COLORS */
+        .x { color: #FF1744; text-shadow: 0 0 20px #FF1744; }
+        .o { color: #00E676; text-shadow: 0 0 20px #00E676; }
+
+        /* --- WIN MESSAGE --- */
+        #status { margin-top: 20px; font-size: 20px; color: #aaa; min-height: 30px; }
+
+        /* RESET BUTTON */
+        .reset-btn {
+            margin-top: 20px; padding: 12px 30px;
+            background: #FF1744; color: white; border: none;
+            border-radius: 30px; font-size: 16px; font-weight: bold;
+            cursor: pointer; box-shadow: 0 0 15px #FF1744;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>TIC TAC TOE</h1>
+
+    <div class="controls">
+        <button class="btn active" onclick="setMode('friend')" id="btn-friend">🧑 vs 🧑 Friend</button>
+        <button class="btn" onclick="setMode('computer')" id="btn-computer">🧑 vs 🤖 Computer</button>
+    </div>
+
+    <div class="scoreboard">
+        <div class="score-box x-score">X (You)<br><span id="scoreX">0</span></div>
+        <div class="score-box o-score">O (Opp)<br><span id="scoreO">0</span></div>
+    </div>
+
+    <div class="board" id="board">
+        <div class="cell" onclick="makeMove(0)"></div>
+        <div class="cell" onclick="makeMove(1)"></div>
+        <div class="cell" onclick="makeMove(2)"></div>
+        <div class="cell" onclick="makeMove(3)"></div>
+        <div class="cell" onclick="makeMove(4)"></div>
+        <div class="cell" onclick="makeMove(5)"></div>
+        <div class="cell" onclick="makeMove(6)"></div>
+        <div class="cell" onclick="makeMove(7)"></div>
+        <div class="cell" onclick="makeMove(8)"></div>
+    </div>
+
+    <div id="status">Player X's Turn</div>
+    <button class="reset-btn" onclick="resetGame()">RESTART GAME</button>
+
+    <script>
+        let board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameActive = true;
+        let mode = 'friend'; // 'friend' or 'computer'
+        let scores = { X: 0, O: 0 };
+
+        const statusDisplay = document.getElementById('status');
+        const cells = document.querySelectorAll('.cell');
+
+        // --- 1. GAME LOGIC ---
+        function makeMove(index) {
+            // যদি সেল খালি না থাকে বা গেম শেষ হয়ে থাকে, তাহলে কিছু হবে না
+            if (board[index] !== '' || !gameActive) return;
+
+            // Player Move
+            updateCell(index, currentPlayer);
+            checkResult();
+
+            // Computer Move (If mode is computer and game is active)
+            if (gameActive && mode === 'computer' && currentPlayer === 'O') {
+                setTimeout(computerMove, 500); // একটু দেরি করে চাল দেবে
+            }
+        }
+
+        function updateCell(index, player) {
+            board[index] = player;
+            cells[index].innerText = player;
+            cells[index].classList.add(player.toLowerCase());
+            
+            // Turn Change
+            if(gameActive) {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                statusDisplay.innerText = `Player ${currentPlayer}'s Turn`;
+            }
+        }
+
+        // --- 2. COMPUTER AI (Smart Logic) ---
+        function computerMove() {
+            if(!gameActive) return;
+
+            let emptyCells = board.map((v, i) => v === '' ? i : null).filter(v => v !== null);
+            let moveIndex;
+
+            // A. জেতার চেষ্টা করবে (Win Logic)
+            moveIndex = findBestMove('O');
+            
+            // B. যদি জিততে না পারে, তবে আটকানোর চেষ্টা করবে (Block Logic)
+            if (moveIndex === -1) moveIndex = findBestMove('X');
+
+            // C. তাও না হলে র‍্যান্ডম চাল (Random)
+            if (moveIndex === -1) {
+                moveIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+            }
+
+            updateCell(moveIndex, 'O');
+            checkResult();
+        }
+
+        function findBestMove(player) {
+            const wins = [
+                [0,1,2], [3,4,5], [6,7,8], // Rows
+                [0,3,6], [1,4,7], [2,5,8], // Cols
+                [0,4,8], [2,4,6]           // Diagonals
+            ];
+            
+            for (let condition of wins) {
+                let [a, b, c] = condition;
+                // যদি ২টা ঘর পূর্ণ থাকে এবং ১টা খালি থাকে
+                if (board[a] === player && board[b] === player && board[c] === '') return c;
+                if (board[a] === player && board[c] === player && board[b] === '') return b;
+                if (board[b] === player && board[c] === player && board[a] === '') return a;
+            }
+            return -1;
+        }
+
+        // --- 3. CHECK WIN/DRAW ---
+        function checkResult() {
+            const wins = [
+                [0,1,2], [3,4,5], [6,7,8],
+                [0,3,6], [1,4,7], [2,5,8],
+                [0,4,8], [2,4,6]
+            ];
+
+            let roundWon = false;
+            // আগের প্লেয়ার (যে চাল দিয়েছে) চেক করা
+            let prevPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+            for (let i = 0; i < wins.length; i++) {
+                const [a, b, c] = wins[i];
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    roundWon = true;
+                    break;
+                }
+            }
+
+            if (roundWon) {
+                statusDisplay.innerText = `🎉 Player ${prevPlayer} Wins!`;
+                statusDisplay.style.color = prevPlayer === 'X' ? '#FF1744' : '#00E676';
+                gameActive = false;
+                scores[prevPlayer]++;
+                updateScore();
+                return;
+            }
+
+            if (!board.includes('')) {
+                statusDisplay.innerText = "Draw! 😐";
+                statusDisplay.style.color = "white";
+                gameActive = false;
+                return;
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('scoreX').innerText = scores.X;
+            document.getElementById('scoreO').innerText = scores.O;
+        }
+
+        // --- 4. CONTROLS ---
+        function resetGame() {
+            board = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            currentPlayer = 'X';
+            statusDisplay.innerText = "Player X's Turn";
+            statusDisplay.style.color = "#aaa";
+            cells.forEach(cell => {
+                cell.innerText = "";
+                cell.classList.remove('x', 'o');
+            });
+        }
+
+        function setMode(selectedMode) {
+            mode = selectedMode;
+            // UI Update
+            document.getElementById('btn-friend').classList.toggle('active', mode === 'friend');
+            document.getElementById('btn-computer').classList.toggle('active', mode === 'computer');
+            // Reset Score & Game
+            scores = { X: 0, O: 0 };
+            updateScore();
+            resetGame();
+        }
+    </script>
+</body>
+</html>
