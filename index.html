@@ -458,9 +458,74 @@
   .seo-content a{ color:var(--brass); }
 
   @media (min-width:600px){ .brand h1{ font-size:3.4rem; } }
+
+  /* ---------------- PWA INSTALL TOP POPUP ---------------- */
+  #install-popup{
+    position:fixed;
+    top:-120px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(94vw, 420px);
+    z-index:200;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    background:linear-gradient(180deg,#241d16,#171310);
+    border:1px solid rgba(201,162,75,0.35);
+    border-radius:16px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
+    transition:top .35s ease;
+  }
+  #install-popup.show{ top:12px; }
+  #install-popup .ip-icon{
+    flex:0 0 auto;
+    width:40px; height:40px;
+    border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 32% 30%, #3a2f22, #171310);
+    border:1px solid rgba(201,162,75,0.3);
+  }
+  #install-popup .ip-icon svg{ width:20px; height:20px; stroke:var(--brass); }
+  #install-popup .ip-text{ flex:1; min-width:0; }
+  #install-popup .ip-text strong{
+    display:block; font-family:var(--serif); font-size:.92rem; color:var(--ivory); font-weight:600;
+  }
+  #install-popup .ip-text span{ display:block; font-size:.72rem; color:var(--text-dim); margin-top:2px; }
+  #install-popup .ip-actions{ flex:0 0 auto; display:flex; align-items:center; gap:6px; }
+  #install-popup .ip-install{
+    padding:8px 14px; border-radius:999px; border:none;
+    background:linear-gradient(180deg, var(--brass), var(--brass-soft));
+    color:#1a1510; font-size:.72rem; font-weight:700; letter-spacing:.04em;
+    cursor:pointer; -webkit-appearance:none; appearance:none;
+  }
+  #install-popup .ip-close{
+    width:28px; height:28px; border-radius:50%; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+    color:var(--text-main); font-size:1.1rem; line-height:1; cursor:pointer;
+    -webkit-appearance:none; appearance:none;
+  }
 </style>
 </head>
 <body id="top">
+
+  <!-- ============================================================
+       PWA INSTALL POPUP — shown once on first visit, top of screen
+  ============================================================ -->
+  <div id="install-popup">
+    <div class="ip-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+    </div>
+    <div class="ip-text">
+      <strong>Install Tic Tac Toe</strong>
+      <span>Add it to your home screen for quick access.</span>
+    </div>
+    <div class="ip-actions">
+      <button type="button" class="ip-install" id="install-popup-btn">Install</button>
+      <button type="button" class="ip-close" id="install-popup-close" aria-label="Close">&times;</button>
+    </div>
+  </div>
 
   <!-- ============================================================
        PAGE 1 — MENU
@@ -542,40 +607,6 @@
     </div>
 
   </div>
-
-  <!-- ============================================================
-       VISIBLE SEO CONTENT — same content family as the About modal,
-       rendered directly on the page (not hidden) so it is part of
-       the crawlable, rendered page content.
-  ============================================================ -->
-  <section class="seo-content" id="seo-visible" style="max-width:640px; margin:0 auto;">
-    <h2>Play Tic Tac Toe Online</h2>
-    <p>Play Tic Tac Toe online for free with Raxzen. Choose <strong>Vs Computer</strong> to challenge the built-in opponent, or <strong>Vs Friend</strong> to play two-player Tic Tac Toe on the same device. No download or installation is required — just open the page and play.</p>
-
-    <h3>How to Play Tic Tac Toe</h3>
-    <p><strong>Tic Tac Toe Rules:</strong> Take turns placing X or O on a 3×3 grid. The first player to line up three matching marks in a row, column, or diagonal wins. If the board fills up with no line, the round ends in a draw.</p>
-    <p><strong>Play Against the Computer:</strong> The built-in AI opponent looks for an available winning move first, then blocks your winning move when possible, and otherwise plays a legal move — a quick, accessible single-player match.</p>
-    <p><strong>Play Tic Tac Toe With a Friend:</strong> Pass the same device back and forth and take turns placing X and O locally — no account or second device needed.</p>
-    <p><strong>Tic Tac Toe on Mobile:</strong> The board and controls are touch-friendly and responsive, so the game plays comfortably on phones, tablets, laptops, and desktops.</p>
-
-    <h3>What Is Tic Tac Toe?</h3>
-    <p>Tic Tac Toe, also known as Noughts and Crosses or the X and O game, is a classic two-player strategy puzzle played on a 3×3 grid. It's simple to learn, quick to play, and a timeless way to pass a few minutes solo or with a friend.</p>
-
-    <h3>Tic Tac Toe Strategy Tips</h3>
-    <ul>
-      <li>Taking the center square first gives you the most possible winning lines.</li>
-      <li>Corners are generally stronger opening moves than edges.</li>
-      <li>Always check the board for your own winning move before doing anything else.</li>
-      <li>If you can't win this turn, check whether your opponent can — and block it.</li>
-      <li>Watch for "fork" opportunities, where one move creates two possible winning lines at once.</li>
-    </ul>
-
-    <h3>Frequently Asked Questions</h3>
-    <p><strong>Is Tic Tac Toe free?</strong> Yes. The game is available as a free browser-based experience.</p>
-    <p><strong>Can I play against the computer?</strong> Yes, choose Vs Computer from the menu.</p>
-    <p><strong>Can two people play together?</strong> Yes, Vs Friend lets two players share the same device.</p>
-    <p><strong>Do I need to download anything?</strong> No. You can play directly in a compatible browser.</p>
-  </section>
 
   <!-- ============================================================
        PWA INSTALL BUTTON — hidden by default, shown only when the
@@ -1058,12 +1089,47 @@ if ('serviceWorker' in navigator) {
 let deferredInstallPrompt = null;
 const installBtnWrap = document.getElementById('install-btn-wrap');
 const installBtn = document.getElementById('install-btn');
+const installPopup = document.getElementById('install-popup');
+const installPopupBtn = document.getElementById('install-popup-btn');
+const installPopupClose = document.getElementById('install-popup-close');
+const INSTALL_POPUP_KEY = 'ttt_install_popup_shown';
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredInstallPrompt = e;
   if (installBtnWrap) installBtnWrap.style.display = 'flex';
+
+  // Show the top popup once, on the user's first visit only.
+  try {
+    if (!localStorage.getItem(INSTALL_POPUP_KEY) && installPopup) {
+      setTimeout(() => { installPopup.classList.add('show'); }, 900);
+      localStorage.setItem(INSTALL_POPUP_KEY, '1');
+    }
+  } catch (err) { /* localStorage unavailable — skip popup */ }
 });
+
+function hideInstallPopup(){
+  if (installPopup) installPopup.classList.remove('show');
+}
+
+if (installPopupBtn) {
+  installPopupBtn.addEventListener('click', async () => {
+    playTapSound();
+    hideInstallPopup();
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    if (installBtnWrap) installBtnWrap.style.display = 'none';
+  });
+}
+
+if (installPopupClose) {
+  installPopupClose.addEventListener('click', () => {
+    playTapSound();
+    hideInstallPopup();
+  });
+}
 
 if (installBtn) {
   installBtn.addEventListener('click', async () => {
@@ -1078,6 +1144,7 @@ if (installBtn) {
 
 window.addEventListener('appinstalled', () => {
   if (installBtnWrap) installBtnWrap.style.display = 'none';
+  hideInstallPopup();
   deferredInstallPrompt = null;
 });
 </script>
