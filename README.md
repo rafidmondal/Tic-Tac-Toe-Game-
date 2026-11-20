@@ -2,5 +2,4 @@ url=
 
 
 
-
-https://toss-heads-or-tails.raxzen.in
+https://tic-tac-toe.raxzen.in/
