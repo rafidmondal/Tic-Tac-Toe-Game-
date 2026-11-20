@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://tic-tac-toe.raxzen.in/</loc>
+    <image:image>
+      <image:loc>https://tic-tac-toe.raxzen.in/preview.png</image:loc>
+      <image:title>Tic Tac Toe Online 3x3 Tabletop Game</image:title>
+      <image:caption>Play Tic Tac Toe online free against Smart AI or a Friend by Raxzen</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://tic-tac-toe.raxzen.in/images/ttt-board.png</image:loc>
+      <image:title>Classic 3x3 Tic Tac Toe Board</image:title>
+      <image:caption>Classic 3x3 Noughts and Crosses board layout</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://tic-tac-toe.raxzen.in/images/ttt-vs-ai.png</image:loc>
+      <image:title>Tic Tac Toe Vs Smart AI Mode</image:title>
+      <image:caption>Single-player Tic Tac Toe against logic-based AI opponent</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://tic-tac-toe.raxzen.in/images/ttt-vs-friend.png</image:loc>
+      <image:title>Tic Tac Toe 2-Player Local Mode</image:title>
+      <image:caption>Two-player Tic Tac Toe on one device</image:caption>
+    </image:image>
+  </url>
+</urlset>

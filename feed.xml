@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tic Tac Toe Online — Raxzen</title>
+    <link>https://tic-tac-toe.raxzen.in/</link>
+    <description>Classic 3x3 Tic Tac Toe (Noughts and Crosses) online free vs Smart AI or Friend.</description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Nov 2026 12:00:00 +0000</lastBuildDate>
+    <atom:link href="https://tic-tac-toe.raxzen.in/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Play Tic Tac Toe Online Free — Vs Smart AI &amp; 2-Player Tabletop Mode</title>
+      <link>https://tic-tac-toe.raxzen.in/</link>
+      <guid isPermaLink="true">https://tic-tac-toe.raxzen.in/</guid>
+      <pubDate>Fri, 20 Nov 2026 12:00:00 +0000</pubDate>
+      <description>Challenge our smart AI or play with a friend on a responsive 3x3 tabletop board with live scoring and sound effects.</description>
+    </item>
+  </channel>
+</rss>

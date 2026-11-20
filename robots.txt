@@ -1,4 +1,20 @@
 User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
 Sitemap: https://tic-tac-toe.raxzen.in/sitemap.xml
+Sitemap: https://tic-tac-toe.raxzen.in/image-sitemap.xml

@@ -1,0 +1,24 @@
+# Tic Tac Toe Online — Classic 3x3 Strategy Game (Raxzen)
+
+> Official Website: https://tic-tac-toe.raxzen.in/
+> Creator: Raxzen | Location: India | Last update: This month
+
+## Summary
+Tic Tac Toe (Noughts and Crosses) by Raxzen is a free, instant, zero-download 3x3 strategy board game for desktop and mobile browsers. Players can challenge a smart, logic-based AI opponent or play 2-player local matches on a single device with a warm tabletop interface, live scoreboard, and interactive sound effects.
+
+## Core Features & Game Modes
+- **Vs Computer (Smart AI)**: Single-player mode where the AI checks for winning moves, blocks opponent threats, and plays tactically.
+- **Vs Friend (2-Player Local)**: Classic X vs O pass-and-play mode on one screen.
+- **Live Scoreboard**: Real-time win tracking for X and O across rounds.
+- **Interactive Audio & Tabletop UI**: Responsive controls, crisp sound effects, and adaptive performance for smooth play on low-end (500MB RAM) to high-end devices.
+- **PWA Support**: Installable as a lightweight offline-capable web app.
+
+## Canonical Pages & Resources
+- [Play Tic Tac Toe](https://tic-tac-toe.raxzen.in/): Main 3x3 game board, modes, About modal, and visual guide.
+- [About](https://tic-tac-toe.raxzen.in/about.html): Game rules, AI logic overview, and Raxzen creator info.
+- [Privacy Policy](https://tic-tac-toe.raxzen.in/privacy.html): Local browser storage and privacy details.
+- [Sitemap](https://tic-tac-toe.raxzen.in/sitemap.xml) | [Image Sitemap](https://tic-tac-toe.raxzen.in/image-sitemap.xml) | [RSS Feed](https://tic-tac-toe.raxzen.in/feed.xml)
+
+## Contact
+- Email: radidmondal@gmail.com
+- Telegram: https://t.me/rafidmondal
